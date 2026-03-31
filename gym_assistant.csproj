@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<TargetFrameworks>net10.0-android</TargetFrameworks>
 		<TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+		<CodesignKey>Apple Development: artembaranenko1005@gmail.com (2RDM65ZJD9)</CodesignKey>
+		<CodesignProvision>Automatic</CodesignProvision>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
 
 		<!-- Note for MacCatalyst:

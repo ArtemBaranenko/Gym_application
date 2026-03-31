@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace gym_assistant;
+﻿namespace gym_assistant;
 
 public partial class App : Application
 {
