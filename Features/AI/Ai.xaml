@@ -3,6 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="gym_assistant.AiPage">
 
+    <Shell.TitleView>
+        <Label Text="AI"
+               FontFamily="KumarOne-Regular"
+               FontSize="22"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+    </Shell.TitleView>
+
     <Label
         Text="AI page"/>
 

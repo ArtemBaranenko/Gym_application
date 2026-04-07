@@ -7,4 +7,9 @@ public partial class JournalPage : ContentPage
         InitializeComponent();
         // BindingContext = new Model();
     }
+
+    private async void OnCreateWorkoutClicked(object? sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new CreateNotePage());
+    }
 };

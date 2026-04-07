@@ -3,7 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="gym_assistant.WorkoutPage">
 
-    <Label
-        Text="Workout page"/>
+    <Shell.TitleView>
+        <Label Text="Workout"
+               FontFamily="KumarOne-Regular"
+               FontSize="22"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+    </Shell.TitleView>
 
+    <VerticalStackLayout>
+        <Label
+            Text="Workout page"/>
+
+        <Button Text="Create workout"
+                Clicked="OnCreateWorkoutClicked"/>
+        <Button Text="Exercise Mode"
+                Clicked="OnExerciseModeClicked"/>
+    </VerticalStackLayout>
 </ContentPage>

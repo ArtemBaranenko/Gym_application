@@ -7,29 +7,39 @@
     Title="gym_assistant">
 
     <TabBar>
-        <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage"/>
+        <Tab Icon="main.png">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage"/>
+        </Tab>
 
-        <ShellContent
-            Title="Progress"
-            ContentTemplate="{DataTemplate local:ProgressPage}"
-            Route="ProgressPage"/>
+        <Tab Icon="stats.png">
+            <ShellContent
+                Title="Progress"
+                ContentTemplate="{DataTemplate local:ProgressPage}"
+                Route="ProgressPage"/>
+        </Tab>
 
-        <ShellContent
-            Title="Workout"
-            ContentTemplate="{DataTemplate local:WorkoutPage}"
-            Route="WorkoutPage"/>
+        <Tab Icon="ai.png">
+            <ShellContent
+                Title="AI"
+                ContentTemplate="{DataTemplate local:AiPage}"
+                Route="AiPage"/>
+        </Tab>
 
-        <ShellContent
-            Title="Journal"
-            ContentTemplate="{DataTemplate local:JournalPage}"
-            Route="JournalPage"/>
+        <Tab Icon="workouts.png">
+            <ShellContent
+                Title="Workout"
+                ContentTemplate="{DataTemplate local:WorkoutPage}"
+                Route="WorkoutPage"/>
+        </Tab>
 
-        <ShellContent
-            Title="AI"
-            ContentTemplate="{DataTemplate local:AiPage}"
-            Route="AiPage"/>
+        <Tab Icon="notes.png">
+            <ShellContent
+                Title="Journal"
+                ContentTemplate="{DataTemplate local:JournalPage}"
+                Route="JournalPage"/>
+        </Tab>
     </TabBar>
 </Shell>

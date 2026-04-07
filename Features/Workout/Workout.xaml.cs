@@ -7,4 +7,13 @@ public partial class WorkoutPage : ContentPage
         InitializeComponent();
         // BindingContext = new Model();
     }
+
+    private async void OnCreateWorkoutClicked(object? sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new CreateWorkoutPage());
+    }
+    private async void OnExerciseModeClicked(object? sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new ExerciseModePage());
+    }
 };
