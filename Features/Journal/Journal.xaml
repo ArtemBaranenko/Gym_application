@@ -6,14 +6,15 @@
     <Shell.TitleView>
         <Label Text="Journal"
                FontFamily="KumarOne-Regular"
-               FontSize="22"
+               FontSize="32"
                HorizontalOptions="Center"
                VerticalOptions="Center"/>
     </Shell.TitleView>
 
     <VerticalStackLayout>
         <Label
-            Text="Journal page"/>
+            Text="Journal page"
+            Padding="10"/>
 
         <Button Text="Create Note"
                 Clicked="OnCreateWorkoutClicked"/>

@@ -13,7 +13,8 @@
 
     <VerticalStackLayout>
         <Label
-            Text="Workout page"/>
+            Text="Workout page"
+            Padding="10"/>
 
         <Button Text="Create workout"
                 Clicked="OnCreateWorkoutClicked"/>

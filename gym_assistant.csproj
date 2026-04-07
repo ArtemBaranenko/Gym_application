@@ -30,7 +30,7 @@
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
 
 		<!-- Display name -->
-		<ApplicationTitle>gym_assistant</ApplicationTitle>
+		<ApplicationTitle>GA</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.gym_assistant</ApplicationId>
