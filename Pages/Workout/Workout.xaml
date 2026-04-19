@@ -20,5 +20,6 @@
                 Clicked="OnCreateWorkoutClicked"/>
         <Button Text="Exercise Mode"
                 Clicked="OnExerciseModeClicked"/>
+        <Button Text="Start workout"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -16,4 +16,3 @@ public partial class WorkoutPage : ContentPage
     {
         await Navigation.PushModalAsync(new ExerciseModePage());
     }
-};

@@ -6,8 +6,25 @@ public class WorkoutService
     {
 
     }
-    public void StartWorkout(WorkoutExercise workoutExercise)
+    public void StartWorkout(WorkoutSession workoutSession)
     {
+
+        int id = 1;
+        string workoutName = "Default";
+        float length = 0.0;
+        DateTime date = DateTime.Now;
+        string note = "Note";
+        bool finished = false;
+
+        var workoutSession = new WorkoutSession
+        {
+            Id = id,
+            WorkoutName = workoutName,
+            Length = length,
+            Date = date,
+            Note = note,
+            Finished = finished
+        };
 
     }
 
