@@ -2,6 +2,8 @@ namespace gym_assistant;
 
 public partial class WorkoutPage : ContentPage
 {
+    WorkoutService _workoutService = new WorkoutService();
+
     public WorkoutPage()
     {
         InitializeComponent();
@@ -16,3 +18,9 @@ public partial class WorkoutPage : ContentPage
     {
         await Navigation.PushModalAsync(new ExerciseModePage());
     }
+    private void OnShowWorkoutClicked(object? sender, EventArgs e)
+    {
+        WorkoutPreview.ItemsSource = null;
+        WorkoutPreview.ItemsSource = _workoutService.ShowWorkout();
+    }
+}

@@ -21,5 +21,9 @@
         <Button Text="Exercise Mode"
                 Clicked="OnExerciseModeClicked"/>
         <Button Text="Start workout"/>
+        <Button Text="ShowWorkout"
+                Clicked="OnShowWorkoutClicked"/>
+        <CollectionView x:Name="WorkoutPreview"
+                        BackgroundColor="Gray"/>
     </VerticalStackLayout>
 </ContentPage>
