@@ -5,7 +5,7 @@ public partial class CreateNotePage : ContentPage
     public CreateNotePage()
     {
         InitializeComponent();
-        // BindingContext = new Model();
+        BindingContext = new CreateNoteViewModel();
     }
     private async void OnBackClicked(object? sender, EventArgs e)
     {

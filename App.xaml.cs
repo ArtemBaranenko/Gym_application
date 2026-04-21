@@ -11,4 +11,18 @@ public partial class App : Application
 	{
 		return new Window(new AppShell());
 	}
+
+	private static SQLService databaseService = default!;
+	public static SQLService DatabaseService
+	{
+		get
+		{
+			if (databaseService == null)
+			{
+				var path = Path.Combine(FileSystem.AppDataDirectory, "gym.db");
+				databaseService = new SQLService(path);
+			}
+			return databaseService;
+		}
+	}
 }

@@ -12,9 +12,35 @@
     </Shell.TitleView>
 
     <VerticalStackLayout>
-        <Label
-            Text="Journal page"
-            Padding="10"/>
+        <Editor x:Name="noteEditor"
+                Placeholder="Enter note here"
+                AutoSize="TextChanges"
+                BackgroundColor="Gray"/>
+        <Button Text="Save Note"
+                Clicked="onSaveClicked"/>
+        <CollectionView x:Name="notesListView"
+                        BackgroundColor="Gray"
+                        MaximumHeightRequest="450">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Padding="10">
+
+                        <Label
+                            Text="{Binding Note}"
+                            FontSize="16"
+                            FontAttributes="Bold"/>
+
+                        <Label
+                            Text="{Binding NoteDate}"
+                            FontSize="12"
+                            FontAttributes="Bold"/>
+
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Refresh"
+                Clicked="onRefreshClicked"/>
 
         <Button Text="Create Note"
                 Clicked="OnCreateWorkoutClicked"/>

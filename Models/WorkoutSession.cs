@@ -1,21 +1,25 @@
 using System;
+using SQLite;
 
 public class WorkoutSession
 {
-    public int Id { get; set; }
+    [PrimaryKey, AutoIncrement]
+    public int SessionId { get; set; }
+    [Indexed]
     public int WorkoutId { get; set; }
     public double Length { get; set; }
     public DateTime? StartDate { get; set; }
-    public string? Note { get; set; }
+    [Indexed]
+    public string? NoteId { get; set; }
     public bool Finished { get; set; }
 
-    public WorkoutSession(int id, int workoutId, double length, DateTime? startDate, string note, bool finished)
+    public WorkoutSession(int sessionid, int workoutId, double length, DateTime? startDate, string note, bool finished)
     {
-        Id = id;
+        SessionId = sessionid;
         WorkoutId = workoutId;
         Length = length;
         StartDate = startDate;
-        Note = note;
+        NoteId = note;
         Finished = finished;
     }
 }
