@@ -14,13 +14,13 @@
     <VerticalStackLayout>
         <Label
             Text="Create Note page"/>
-        <Editor x:Name="noteEditor"
+        <Editor Text="{Binding NoteText}"
                 Placeholder="Enter note here"
                 AutoSize="TextChanges"
                 BackgroundColor="Gray"/>
         <Button Text="Save Note"
-                Clicked="onSaveClicked"/>
-        <CollectionView x:Name="notesListView"
+                Command="{Binding SaveCommand}"/>
+        <CollectionView ItemsSource="{Binding Notes}"
                         BackgroundColor="Gray"
                         MaximumHeightRequest="450">
             <CollectionView.ItemTemplate>
@@ -42,7 +42,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <Button Text="Refresh"
-                Clicked="onRefreshClicked"/>
+                Command="{Binding RefreshCommand}"/>
         <Button
             Text="Back"
             Clicked="OnBackClicked"/>

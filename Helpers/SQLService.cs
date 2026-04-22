@@ -8,10 +8,11 @@ public class SQLService
     {
         _database = new SQLiteAsyncConnection(databasePath);
 
-        _database.CreateTableAsync<Notes>().Wait();
-        _database.CreateTableAsync<WorkoutExercises>().Wait();
-        _database.CreateTableAsync<WorkoutPrograms>().Wait();
-        _database.CreateTableAsync<WorkoutHistory>().Wait();
+    }
+
+    public async Task InitAsync()
+    {
+        await _database.CreateTableAsync<Notes>();
     }
 
     public async Task<List<Notes>> GetNotesAsync()
@@ -19,7 +20,7 @@ public class SQLService
         return await _database.Table<Notes>().ToListAsync();
     }
 
-    public async Task<int> SaveNoteAsync(Notes notes)
+    public async Task<int> SaveAsync(Notes notes)
     {
         if (notes.Id != 0)
         {

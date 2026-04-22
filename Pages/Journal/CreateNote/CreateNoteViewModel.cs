@@ -1,40 +1,72 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using System.Collections.ObjectModel;
+
 namespace gym_assistant;
 
-public class CreateNoteViewModel
+public class CreateNoteViewModel : INotifyPropertyChanged
 {
-    SQLService databaseSerice = App.DatabaseService;
-
-    private async Task UpdateNotes()
+    private string? _noteText;
+    public string? NoteText
     {
-        notesListView.ItemsSource = null;
-        notesListView.ItemsSource = await databaseSerice.GetNotesAsync();
-    }
-
-    private async void onRefreshClicked(object sender, EventArgs e)
-    {
-        await UpdateNotes();
-    }
-
-    private async Task SaveNote()
-    {
-        Notes newNotes = new Notes()
+        get => _noteText;
+        set
         {
-            Note = noteEditor.Text,
-            NoteDate = DateTime.Now,
-        };
-
-        int result = await databaseSerice.SaveNoteAsync(newNotes);
-
-        if (result == 1)
-        {
-            await UpdateNotes();
-            noteEditor.IsEnabled = false;
-            noteEditor.IsEnabled = true;
+            _noteText = value;
+            OnPropertyChanged();
         }
     }
 
-    private async void onSaveClicked(object sender, EventArgs e)
+    public ObservableCollection<Notes> Notes { get; set; } = new();
+    public ICommand SaveCommand { get; }
+
+    public CreateNoteViewModel()
     {
-        await SaveNote();
+        SaveCommand = new Command(async () => await SaveNoteAsync());
     }
+
+    private async Task SaveNoteAsync()
+    {
+        Notes note = new Notes
+        {
+            Note = NoteText
+        };
+
+        await App.DatabaseService.SaveAsync(note);
+
+        Notes.Add(note);
+
+        NoteText = string.Empty;
+        OnPropertyChanged(nameof(NoteText));
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+
+
+    // private async Task UpdateNotes()
+    // {
+    //     notesListView.ItemsSource = null;
+    //     notesListView.ItemsSource = await databaseSerice.GetNotesAsync();
+    // }
+
+    // private async void onRefreshClicked(object sender, EventArgs e)
+    // {
+    //     await UpdateNotes();
+    // }
+
+
+    // private void onSave()
+    // {
+    //     await SaveNote();
+    // }
+
+
+
 }
