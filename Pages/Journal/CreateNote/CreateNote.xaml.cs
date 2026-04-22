@@ -7,6 +7,9 @@ public partial class CreateNotePage : ContentPage
         InitializeComponent();
         BindingContext = new CreateNoteViewModel();
     }
+
+
+
     private async void OnBackClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//JournalPage");

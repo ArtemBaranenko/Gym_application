@@ -21,8 +21,7 @@
         <Button Text="Save Note"
                 Command="{Binding SaveCommand}"/>
         <CollectionView ItemsSource="{Binding Notes}"
-                        BackgroundColor="Gray"
-                        MaximumHeightRequest="450">
+                        BackgroundColor="Gray">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <VerticalStackLayout Padding="10">
