@@ -2,16 +2,21 @@ namespace gym_assistant;
 
 public partial class JournalPage : ContentPage
 {
+    private readonly JournalViewModel _viewModel;
     public JournalPage()
     {
         InitializeComponent();
-        BindingContext = new Notes();
-    }
-    SQLService databaseSerice = App.DatabaseService;
 
-    private async void OnCreateWorkoutClicked(object? sender, EventArgs e)
+        _viewModel = new JournalViewModel(new NavigationService());
+        BindingContext = _viewModel;
+    }
+
+    protected override async void OnAppearing()
     {
-        await Navigation.PushModalAsync(new CreateNotePage());
-    }
+        base.OnAppearing();
 
+        await App.DatabaseService.InitAsync();
+        await _viewModel.UpdateNotes();
+
+    }
 };

@@ -12,39 +12,24 @@
     </Shell.TitleView>
 
     <VerticalStackLayout>
-        <Label
-            Text="Create Note page"/>
-        <Editor Text="{Binding NoteText}"
-                Placeholder="Enter note here"
-                AutoSize="TextChanges"
-                BackgroundColor="Gray"/>
+        <Border
+            Stroke="White"
+            StrokeThickness="2"
+            Margin="5">
+            <Editor Text="{Binding NoteTitle}"
+                    Placeholder="Title:"
+                    AutoSize="TextChanges"/>
+        </Border>
+        <Border
+            Stroke="White"
+            StrokeThickness="2"
+            Margin="5">
+            <Editor Text="{Binding NoteText}"
+                    Placeholder="Note:"
+                    AutoSize="TextChanges"/>
+        </Border>
         <Button Text="Save Note"
                 Command="{Binding SaveCommand}"/>
-        <CollectionView ItemsSource="{Binding Notes}"
-                        BackgroundColor="Gray">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout Padding="10">
-
-                        <Label
-                            Text="{Binding Note}"
-                            FontSize="16"
-                            FontAttributes="Bold"/>
-
-                        <Label
-                            Text="{Binding NoteDate}"
-                            FontSize="12"
-                            FontAttributes="Bold"/>
-
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Text="Refresh"
-                Command="{Binding RefreshCommand}"/>
-        <Button
-            Text="Back"
-            Clicked="OnBackClicked"/>
     </VerticalStackLayout>
 
 </ContentPage>

@@ -17,41 +17,38 @@ public class CreateNoteViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    private string? _noteTitle;
+    public string? NoteTitle
+    {
+        get => _noteTitle;
+        set
+        {
+            _noteTitle = value;
+            OnPropertyChanged();
+        }
+    }
 
     public ObservableCollection<Notes> Notes { get; set; } = new();
     public ICommand SaveCommand { get; }
-    public ICommand RefreshCommand { get; }
 
     public CreateNoteViewModel()
     {
         SaveCommand = new Command(async () => await SaveNoteAsync());
-
-        RefreshCommand = new Command(async () => await UpdateNotes());
     }
 
     private async Task SaveNoteAsync()
     {
         Notes note = new Notes
         {
+            Title = NoteTitle,
             Note = NoteText,
             NoteDate = DateTime.Now
         };
 
         await App.DatabaseService.SaveAsync(note);
 
-        UpdateNotes();
+        NoteTitle = string.Empty;
         NoteText = string.Empty;
-    }
-    private async Task UpdateNotes()
-    {
-        var notesUpdated = await App.DatabaseService.GetNotesAsync();
-
-        Notes.Clear();
-
-        foreach (var note in notesUpdated)
-        {
-            Notes.Add(note);
-        }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -60,21 +57,4 @@ public class CreateNoteViewModel : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
-
-
-
-    // private async void onRefreshClicked(object sender, EventArgs e)
-    // {
-    //     await UpdateNotes();
-    // }
-
-
-    // private void onSave()
-    // {
-    //     await SaveNote();
-    // }
-
-
-
 }
