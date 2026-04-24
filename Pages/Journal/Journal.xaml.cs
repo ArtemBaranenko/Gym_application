@@ -17,6 +17,5 @@ public partial class JournalPage : ContentPage
 
         await App.DatabaseService.InitAsync();
         await _viewModel.UpdateNotes();
-
     }
 };

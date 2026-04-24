@@ -13,6 +13,8 @@ public class SQLService
     public async Task InitAsync()
     {
         await _database.CreateTableAsync<Notes>();
+        await _database.CreateTableAsync<WorkoutPrograms>();
+
     }
 
     public async Task<List<Notes>> GetNotesAsync()

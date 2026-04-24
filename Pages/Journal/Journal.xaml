@@ -14,9 +14,9 @@
     <VerticalStackLayout>
 
         <Button Text="Create Note"
-                Command="{Binding OpenCreateWorkoutCommand}"/>
+                Command="{Binding OpenCreateNoteCommand}"/>
         <CollectionView ItemsSource="{Binding Notes}"
-                        MaximumHeightRequest="650">
+                        HeightRequest="650">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <VerticalStackLayout Padding="10">
@@ -39,6 +39,4 @@
         </CollectionView>
 
     </VerticalStackLayout>
-
-
 </ContentPage>

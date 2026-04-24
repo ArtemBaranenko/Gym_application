@@ -1,19 +1,45 @@
-public class WorkoutViewModel
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using System.Collections.ObjectModel;
+
+namespace gym_assistant;
+
+public class WorkoutViewModel : INotifyPropertyChanged
 {
-    // int id = 1;
 
+    private readonly INavigationService _navigation;
+    public ObservableCollection<WorkoutHistory> WorkoutHistory { get; set; } = new();
 
-    // var workoutSession = new WorkoutSession
+    public ICommand OpenCreateWorkoutCommand { get; }
+
+    public WorkoutViewModel(INavigationService navigation)
+    {
+        _navigation = navigation;
+
+        OpenCreateWorkoutCommand = new Command(async () => await _navigation.GoToAsync(nameof(CreateWorkoutPage)));
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string? properyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(properyName));
+    }
+
+    // private async void OnCreateWorkoutClicked(object? sender, EventArgs e)
     // {
-    //     Id = id,
-    //     WorkoutName = workoutName,
-    //     Length = length,
-    //     Date = date,
-    //     Note = note,
-    //     Finished = finished
-    // };
-
-
+    //     await Navigation.PushModalAsync(new CreateWorkoutPage());
+    // }
+    // private async void OnExerciseModeClicked(object? sender, EventArgs e)
+    // {
+    //     await Navigation.PushModalAsync(new ExerciseModePage());
+    // }
+    // private void OnShowWorkoutClicked(object? sender, EventArgs e)
+    // {
+    //     WorkoutPreview.ItemsSource = null;
+    //     WorkoutPreview.ItemsSource = _workoutService.ShowWorkout();
+    // }
 
 
 }

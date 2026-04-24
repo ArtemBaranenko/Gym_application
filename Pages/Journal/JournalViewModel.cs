@@ -10,13 +10,13 @@ public class JournalViewModel : INotifyPropertyChanged
     private readonly INavigationService _navigation;
     public ObservableCollection<Notes> Notes { get; set; } = new();
 
-    public ICommand OpenCreateWorkoutCommand { get; }
+    public ICommand OpenCreateNoteCommand { get; }
 
     public JournalViewModel(INavigationService navigation)
     {
         _navigation = navigation;
 
-        OpenCreateWorkoutCommand = new Command(async () => await _navigation.GoToAsync(nameof(CreateNotePage)));
+        OpenCreateNoteCommand = new Command(async () => await _navigation.GoToAsync(nameof(CreateNotePage)));
     }
 
     public async Task UpdateNotes()
