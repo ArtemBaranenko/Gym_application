@@ -15,7 +15,6 @@
                 <Label
                         Text="Workout page"
                         Padding="10"/>
-
                 <Button Text="Create workout"
                         Command="{Binding OpenCreateWorkoutCommand}"/>
                 <!-- <Button Text="Exercise Mode"
@@ -23,7 +22,7 @@
                 <Button Text="Start workout"/>
                 <Button Text="ShowWorkout"
                         Clicked="OnShowWorkoutClicked"/> -->
-                <CollectionView x:Name="WorkoutPreview"
-                                BackgroundColor="Gray"/>
+                <!-- <CollectionView x:Name="WorkoutPreview"
+                                BackgroundColor="Gray"/> -->
         </VerticalStackLayout>
 </ContentPage>

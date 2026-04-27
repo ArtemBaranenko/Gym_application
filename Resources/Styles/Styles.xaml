@@ -257,7 +257,7 @@
                 <Setter Property="TextColor"
                         Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
                 <Setter Property="TitleColor"
-                        Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"/>
+                        Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"/>
                 <Setter Property="BackgroundColor"
                         Value="Transparent"/>
                 <Setter Property="FontFamily"

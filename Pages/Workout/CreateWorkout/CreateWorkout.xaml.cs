@@ -7,9 +7,4 @@ public partial class CreateWorkoutPage : ContentPage
         InitializeComponent();
         // BindingContext = new Model();
     }
-
-    private async void OnBackClicked(object? sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//WorkoutPage");
-    }
 };

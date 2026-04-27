@@ -12,12 +12,40 @@
     </Shell.TitleView>
 
     <VerticalStackLayout>
-        <Label
-            Text="Create Workout page"/>
+        <Border
+            Stroke="White"
+            StrokeThickness="2"
+            Margin="5">
+            <Editor Text="{Binding WorkoutTitle}"
+                    Placeholder="Title:"
+                    AutoSize="TextChanges"/>
+        </Border>
+        <Border
+            Stroke="White"
+            StrokeThickness="2"
+            Margin="5">
+            <Editor Text="{Binding Exercise}"
+                    Placeholder="Exercise:"
+                    AutoSize="TextChanges"/>
+        </Border>
+        <HorizontalStackLayout>
+            <Picker
+                Title="Sets:"
+                ItemsSource="{Binding NumberOfSets}"
+                SelectedItem="{Binding SelectedNumber}"/>
 
-        <Button
-            Text="Back"
-            Clicked="OnBackClicked"/>
+            <Picker
+                Title="Reps:"
+                ItemsSource="{Binding NumberOfReps}"
+                SelectedItem="{Binding SelectedNumber}"/>
+
+            <Picker
+                Title="Weight:"
+                ItemsSource="{Binding Weight}"
+                SelectedItem="{Binding SelectedNumber}"/>
+        </HorizontalStackLayout>
+
+
     </VerticalStackLayout>
 
 </ContentPage>
