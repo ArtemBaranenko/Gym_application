@@ -255,15 +255,15 @@
 
         <Style TargetType="Picker">
                 <Setter Property="TextColor"
-                        Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
-                <Setter Property="TitleColor"
                         Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"/>
+                <Setter Property="TitleColor"
+                        Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray500}}"/>
                 <Setter Property="BackgroundColor"
                         Value="Transparent"/>
                 <Setter Property="FontFamily"
-                        Value="OpenSansRegular"/>
+                        Value="KumarOne-Regular"/>
                 <Setter Property="FontSize"
-                        Value="14"/>
+                        Value="17"/>
                 <Setter Property="MinimumHeightRequest"
                         Value="44"/>
                 <Setter Property="MinimumWidthRequest"

@@ -28,23 +28,43 @@
                     Placeholder="Exercise:"
                     AutoSize="TextChanges"/>
         </Border>
-        <HorizontalStackLayout>
+        <HorizontalStackLayout
+            HorizontalOptions="Center">
             <Picker
                 Title="Sets:"
                 ItemsSource="{Binding NumberOfSets}"
-                SelectedItem="{Binding SelectedNumber}"/>
+                SelectedItem="{Binding SelectedNumberOfSets}"/>
 
             <Picker
                 Title="Reps:"
                 ItemsSource="{Binding NumberOfReps}"
-                SelectedItem="{Binding SelectedNumber}"/>
+                SelectedItem="{Binding SelectedNumberOfReps}"/>
 
             <Picker
                 Title="Weight:"
                 ItemsSource="{Binding Weight}"
                 SelectedItem="{Binding SelectedNumber}"/>
-        </HorizontalStackLayout>
 
+        </HorizontalStackLayout>
+        <Button
+            Text="Add exercise +"
+            Command="{Binding AddExerciseCommand}"/>
+
+        <Picker Title="Rest between sets"
+                ItemsSource="{Binding RestBetween}"
+                SelectedItem="{Binding SelectedRest}"
+                HorizontalOptions="Center"/>
+
+        <Button Text="Add warm-up +"
+                Command="{Binding AddWarmUpCommand}"/>
+
+        <Button Text="Add cool-down +"
+                Command="{Binding AddCoolDownCommand}"/>
+
+        <Button Text="Create"
+                Command="{Binding CreateCommand}"
+                HorizontalOptions="Center"
+                VerticalOptions="End"/>
 
     </VerticalStackLayout>
 

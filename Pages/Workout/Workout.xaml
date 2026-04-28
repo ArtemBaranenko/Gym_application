@@ -12,9 +12,6 @@
         </Shell.TitleView>
 
         <VerticalStackLayout>
-                <Label
-                        Text="Workout page"
-                        Padding="10"/>
                 <Button Text="Create workout"
                         Command="{Binding OpenCreateWorkoutCommand}"/>
                 <!-- <Button Text="Exercise Mode"
