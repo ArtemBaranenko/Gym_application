@@ -10,4 +10,8 @@ public class NavigationService : INavigationService
     {
         await Shell.Current.GoToAsync("..");
     }
+    public async Task OpenNoteDetailsAsync(Notes note)
+    {
+        await Shell.Current.Navigation.PushAsync(new NoteDetailsPage(note));
+    }
 }

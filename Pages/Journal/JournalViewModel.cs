@@ -11,12 +11,20 @@ public class JournalViewModel : INotifyPropertyChanged
     public ObservableCollection<Notes> Notes { get; set; } = new();
 
     public ICommand OpenCreateNoteCommand { get; }
+    public ICommand OpenNoteCommand { get; }
 
     public JournalViewModel(INavigationService navigation)
     {
         _navigation = navigation;
 
         OpenCreateNoteCommand = new Command(async () => await _navigation.GoToAsync(nameof(CreateNotePage)));
+
+        OpenNoteCommand = new Command<Notes>(async (selectedNote) =>
+        {
+            if (selectedNote == null)
+                return;
+            await _navigation.OpenNoteDetailsAsync(selectedNote);
+        });
     }
 
     public async Task UpdateNotes()

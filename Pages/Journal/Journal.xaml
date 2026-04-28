@@ -16,6 +16,9 @@
         <Button Text="Create Note"
                 Command="{Binding OpenCreateNoteCommand}"/>
         <CollectionView ItemsSource="{Binding Notes}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding OpenNoteCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}"
                         HeightRequest="650">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
