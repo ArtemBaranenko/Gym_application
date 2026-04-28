@@ -14,6 +14,7 @@ public class SQLService
     {
         await _database.CreateTableAsync<Notes>();
         await _database.CreateTableAsync<WorkoutPrograms>();
+        await _database.CreateTableAsync<WorkoutExercises>();
 
     }
 
@@ -33,6 +34,36 @@ public class SQLService
             return await _database.InsertAsync(notes);
         }
     }
+
+    public async Task<List<WorkoutPrograms>> GetWorkoutProgramsAsync()
+    {
+        return await _database.Table<WorkoutPrograms>().ToListAsync();
+    }
+
+    public async Task<int> SaveWorkoutProgramsAsync(WorkoutPrograms workoutPrograms)
+    {
+        if (workoutPrograms.WorkoutId != 0)
+        {
+            return await _database.UpdateAsync(workoutPrograms);
+        }
+        else
+        {
+            return await _database.InsertAsync(workoutPrograms);
+        }
+    }
+
+    public async Task<int> SaveWorkoutExercisesAsync(WorkoutExercises workoutExercises)
+    {
+        if (workoutExercises.ExerciseId != 0)
+        {
+            return await _database.UpdateAsync(workoutExercises);
+        }
+        else
+        {
+            return await _database.InsertAsync(workoutExercises);
+        }
+    }
+
     //TODO: Add delete function
     // public async Task<int> DeleteNoteAsync(Journal journal)
     // {

@@ -14,6 +14,20 @@
         <VerticalStackLayout>
                 <Button Text="Create workout"
                         Command="{Binding OpenCreateWorkoutCommand}"/>
+
+                <Button Text="1"
+                        Command="{Binding FirstWorkoutCommand}"/>
+                <Button Text="2"
+                        Command="{Binding SecondWorkoutCommand}"/>
+                <Button Text="3"
+                        Command="{Binding ThirdWorkoutCommand}"/>
+                <Button Text="4"
+                        Command="{Binding ForthWorkoutCommand}"/>
+                <Button Text="5"
+                        Command="{Binding FifthWorkoutCommand}"/>
+                <Button Text="6"
+                        Command="{Binding SixthWorkoutCommand}"/>
+
                 <!-- <Button Text="Exercise Mode"
                         Clicked="OnExerciseModeClicked"/>
                 <Button Text="Start workout"/>

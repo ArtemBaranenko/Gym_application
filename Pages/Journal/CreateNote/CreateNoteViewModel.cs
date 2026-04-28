@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 
 namespace gym_assistant;
 
+// TODO: Create Note service?
+
 public class CreateNoteViewModel : INotifyPropertyChanged
 {
     private string? _noteText;
@@ -28,7 +30,6 @@ public class CreateNoteViewModel : INotifyPropertyChanged
         }
     }
 
-    public ObservableCollection<Notes> Notes { get; set; } = new();
     public ICommand SaveCommand { get; }
 
     public CreateNoteViewModel()

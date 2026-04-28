@@ -9,6 +9,30 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
 {
     private readonly INavigationService _navigation;
 
+    public ICommand CreateCommand { get; set; }
+
+    private string? _workoutTitle;
+    public string? WorkoutTitle
+    {
+        get => _workoutTitle;
+        set
+        {
+            _workoutTitle = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string? _exercise;
+    public string? Exercise
+    {
+        get => _exercise;
+        set
+        {
+            _exercise = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ObservableCollection<string> NumberOfSets { get; set; } = new()
     {
         "1 set",
@@ -90,9 +114,110 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         }
     }
 
+    public ObservableCollection<string> WarmUp { get; set; } = new()
+    {
+        "15 sec",
+        "30 sec",
+        "45 sec",
+        "60 sec",
+        "1 min",
+        "2 min",
+        "3 min",
+        "4 min",
+        "5 min",
+        "10 min"
+    };
+    private string? _selectedWarmUp;
+    public string? SelectedWarmUp
+    {
+        get => _selectedWarmUp;
+        set
+        {
+            _selectedWarmUp = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ObservableCollection<string> CoolDown { get; set; } = new()
+    {
+        "15 sec",
+        "30 sec",
+        "45 sec",
+        "60 sec",
+        "1 min",
+        "2 min",
+        "3 min",
+        "4 min",
+        "5 min",
+        "10 min"
+    };
+    private string? _selectedCoolDown;
+    public string? SelectedCoolDown
+    {
+        get => _selectedCoolDown;
+        set
+        {
+            _selectedCoolDown = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ObservableCollection<string> WorkoutType { get; set; } = new()
+    {
+        "Cardio",
+        "Weight lifting",
+        "Rest"
+    };
+    private string? _selectedWorkoutType;
+    public string? SelectedWorkoutType
+    {
+        get => _selectedWorkoutType;
+        set
+        {
+            _selectedWorkoutType = value;
+            OnPropertyChanged();
+        }
+    }
+
     public CreateWorkoutViewModel(INavigationService navigation)
     {
         _navigation = navigation;
+        CreateCommand = new Command(async () => await CreateWorkout());
+    }
+
+    private async Task CreateWorkout()
+    {
+        WorkoutPrograms workoutPrograms = new WorkoutPrograms
+        {
+            WorkoutName = WorkoutTitle,
+            WorkoutType = SelectedWorkoutType,
+            WarmUp = SelectedWarmUp,
+            CoolDown = SelectedCoolDown,
+            RestBetweenSets = SelectedRest
+        };
+
+        WorkoutExercises workoutExercises = new WorkoutExercises
+        {
+            WorkoutTitle = WorkoutTitle,
+            Exercise = Exercise,
+            //TODO: Подумай стоит ли сделать Sets и Reps снова int или оставить как есть и в процессе доставать число из строки?
+            Sets = SelectedNumberOfSets,
+            Reps = SelectedNumberOfReps
+            //TODO: Order
+
+        };
+
+        await App.DatabaseService.SaveWorkoutProgramsAsync(workoutPrograms);
+        await App.DatabaseService.SaveWorkoutExercisesAsync(workoutExercises);
+
+        WorkoutTitle = string.Empty;
+        Exercise = string.Empty;
+        SelectedWorkoutType = string.Empty;
+        SelectedNumberOfSets = string.Empty;
+        SelectedNumberOfReps = string.Empty;
+        SelectedWarmUp = string.Empty;
+        SelectedCoolDown = string.Empty;
+        SelectedRest = string.Empty;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

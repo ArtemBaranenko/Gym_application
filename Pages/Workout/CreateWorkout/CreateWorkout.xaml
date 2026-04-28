@@ -12,6 +12,11 @@
     </Shell.TitleView>
 
     <VerticalStackLayout>
+        <Picker
+            Title="Workout Type"
+            ItemsSource="{Binding WorkoutType}"
+            SelectedItem="{Binding SelectedWorkoutType}"
+            HorizontalOptions="Center"/>
         <Border
             Stroke="White"
             StrokeThickness="2"
@@ -55,11 +60,15 @@
                 SelectedItem="{Binding SelectedRest}"
                 HorizontalOptions="Center"/>
 
-        <Button Text="Add warm-up +"
-                Command="{Binding AddWarmUpCommand}"/>
+        <Picker Title="Add warm-up +"
+                ItemsSource="{Binding WarmUp}"
+                SelectedItem="{Binding SelectedWarmUp}"
+                HorizontalOptions="Center"/>
 
-        <Button Text="Add cool-down +"
-                Command="{Binding AddCoolDownCommand}"/>
+        <Picker Title="Add cool-down +"
+                ItemsSource="{Binding CoolDown}"
+                SelectedItem="{Binding SelectedCoolDown}"
+                HorizontalOptions="Center"/>
 
         <Button Text="Create"
                 Command="{Binding CreateCommand}"
