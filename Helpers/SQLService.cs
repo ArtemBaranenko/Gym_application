@@ -23,6 +23,11 @@ public class SQLService
         return await _database.Table<Notes>().ToListAsync();
     }
 
+    public async Task DeleteNoteAsync(Notes note)
+    {
+        await _database.DeleteAsync(note);
+    }
+
     public async Task<int> SaveAsync(Notes notes)
     {
         if (notes.Id != 0)

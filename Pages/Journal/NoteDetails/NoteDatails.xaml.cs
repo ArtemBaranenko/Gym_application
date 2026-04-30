@@ -2,9 +2,9 @@ namespace gym_assistant;
 
 public partial class NoteDetailsPage : ContentPage
 {
-    public NoteDetailsPage(Notes note)
+    public NoteDetailsPage(Notes selectedNote)
     {
         InitializeComponent();
-        BindingContext = note;
+        BindingContext = new NoteDeatailsViewModel(selectedNote);
     }
 }
