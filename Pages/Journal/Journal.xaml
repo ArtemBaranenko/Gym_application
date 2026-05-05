@@ -29,7 +29,8 @@
                             FontAttributes="Bold"/>
                         <Label
                             Text="{Binding Note}"
-                            FontSize="12"/>
+                            FontSize="12"
+                            MaxLines="2"/>
 
                         <Label
                             Text="{Binding NoteDate}"

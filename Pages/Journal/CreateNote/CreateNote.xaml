@@ -12,22 +12,20 @@
     </Shell.TitleView>
 
     <VerticalStackLayout>
-        <Border
-            Stroke="White"
-            StrokeThickness="2"
-            Margin="5">
-            <Editor Text="{Binding NoteTitle}"
-                    Placeholder="Title:"
-                    AutoSize="TextChanges"/>
-        </Border>
-        <Border
-            Stroke="White"
-            StrokeThickness="2"
-            Margin="5">
-            <Editor Text="{Binding NoteText}"
-                    Placeholder="Note:"
-                    AutoSize="TextChanges"/>
-        </Border>
+        <Editor Text="{Binding NoteTitle}"
+                Placeholder="Title:"
+                AutoSize="TextChanges"/>
+
+        <Label
+            Text="⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
+            FontSize="12"
+            Margin="0,0,0,20"/>
+
+        <Editor Text="{Binding NoteText}"
+                Placeholder="Note:"
+                AutoSize="TextChanges"
+                MaximumHeightRequest="600"/>
+
         <Button Text="Save Note"
                 Command="{Binding SaveCommand}"/>
     </VerticalStackLayout>
