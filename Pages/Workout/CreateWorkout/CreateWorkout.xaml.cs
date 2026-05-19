@@ -8,7 +8,7 @@ public partial class CreateWorkoutPage : ContentPage
     {
         InitializeComponent();
 
-        _createWorkoutModel = new CreateWorkoutViewModel(new NavigationService());
+        _createWorkoutModel = new CreateWorkoutViewModel(new NavigationService(), new ExerciseAPIService());
         BindingContext = _createWorkoutModel;
     }
 };

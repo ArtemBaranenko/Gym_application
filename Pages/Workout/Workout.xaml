@@ -15,18 +15,33 @@
                 <Button Text="Create workout"
                         Command="{Binding OpenCreateWorkoutCommand}"/>
 
-                <Button Text="1"
-                        Command="{Binding FirstWorkoutCommand}"/>
-                <Button Text="2"
-                        Command="{Binding SecondWorkoutCommand}"/>
-                <Button Text="3"
-                        Command="{Binding ThirdWorkoutCommand}"/>
-                <Button Text="4"
-                        Command="{Binding ForthWorkoutCommand}"/>
-                <Button Text="5"
-                        Command="{Binding FifthWorkoutCommand}"/>
-                <Button Text="6"
-                        Command="{Binding SixthWorkoutCommand}"/>
+                <CollectionView ItemsSource="{Binding WorkoutPrograms}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding OpenWorkoutCommand}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}"
+                                HeightRequest="650">
+                        <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                        <VerticalStackLayout Padding="10">
+                                                <Border StrokeShape="RoundRectangle 15"
+                                                        Stroke="Gray"
+                                                        StrokeThickness="2"
+                                                        Grid.Column="0"
+                                                        Grid.Row="0">
+                                                        <VerticalStackLayout Padding="10">
+                                                                <Label
+                                                                        Text="{Binding WorkoutName}"
+                                                                        FontSize="16"
+                                                                        FontAttributes="Bold"/>
+                                                                <Label
+                                                                        Text="{Binding WorkoutType}"
+                                                                        FontSize="12"/>
+                                                        </VerticalStackLayout>
+                                                </Border>
+                                        </VerticalStackLayout>
+                                </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <!-- <Button Text="Exercise Mode"
                         Clicked="OnExerciseModeClicked"/>

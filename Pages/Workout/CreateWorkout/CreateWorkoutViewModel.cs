@@ -8,8 +8,11 @@ namespace gym_assistant;
 public class CreateWorkoutViewModel : INotifyPropertyChanged
 {
     private readonly INavigationService _navigation;
+    private readonly ExerciseAPIService _apiService;
+
 
     public ICommand CreateCommand { get; set; }
+    public ICommand FindCommand { get; set; }
 
     private string? _workoutTitle;
     public string? WorkoutTitle
@@ -179,10 +182,18 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         }
     }
 
-    public CreateWorkoutViewModel(INavigationService navigation)
+    public CreateWorkoutViewModel(INavigationService navigation, ExerciseAPIService apiService)
     {
         _navigation = navigation;
+        _apiService = apiService;
+
         CreateCommand = new Command(async () => await CreateWorkout());
+        FindCommand = new Command(async () => await GetExercises());
+    }
+
+    public async Task GetExercises()
+    {
+        await _apiService.GetExerciseAsync("curls");
     }
 
     private async Task CreateWorkout()

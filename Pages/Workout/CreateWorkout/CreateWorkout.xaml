@@ -75,6 +75,47 @@
                 HorizontalOptions="Center"
                 VerticalOptions="End"/>
 
+        <Button Text="Find"
+                Command="{Binding FindCommand}"
+                HorizontalOptions="Center"
+                VerticalOptions="End"/>
+
+        <CollectionView ItemsSource="{Binding ExerciseSuggestion}"
+                        HeightRequest="650">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Padding="10">
+                        <Label
+                            Text="{Binding name}"
+                            FontSize="16"
+                            FontAttributes="Bold"/>
+                        <Label
+                            Text="{Binding type}"
+                            FontSize="12"
+                            MaxLines="2"/>
+                        <Label
+                            Text="{Binding muscule}"
+                            FontSize="12"
+                            MaxLines="2"/>
+                        <Label
+                            Text="{Binding difficulty}"
+                            FontSize="12"
+                            MaxLines="2"/>
+                        <Label
+                            Text="{Binding instructions}"
+                            FontSize="12"
+                            MaxLines="2"/>
+                        <Label
+                            Text="{Binding safety_info}"
+                            FontSize="12"
+                            MaxLines="2"/>
+
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
     </VerticalStackLayout>
 
 </ContentPage>
