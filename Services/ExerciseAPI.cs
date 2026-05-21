@@ -28,9 +28,7 @@ public class ExerciseAPIService
 
         string responseString = await response.Content.ReadAsStringAsync();
 
-        var exercises = JsonSerializer.Deserialize<List<Exercise>>(responseString);
-
-        Console.WriteLine(exercises);
+        List<Exercise>? exercises = JsonSerializer.Deserialize<List<Exercise>>(responseString);
 
         return exercises!;
 

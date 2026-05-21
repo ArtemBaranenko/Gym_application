@@ -148,11 +148,11 @@
 
         <Style TargetType="Entry">
                 <Setter Property="TextColor"
-                        Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                        Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"/>
                 <Setter Property="BackgroundColor"
                         Value="Transparent"/>
                 <Setter Property="FontFamily"
-                        Value="OpenSansRegular"/>
+                        Value="KumarOne-Regular"/>
                 <Setter Property="FontSize"
                         Value="14"/>
                 <Setter Property="PlaceholderColor"

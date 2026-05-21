@@ -11,6 +11,7 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
     private readonly ExerciseAPIService _apiService;
 
 
+    public ObservableCollection<ExerciseAPIService.Exercise> ExerciseSuggestion { get; set; } = new();
     public ICommand CreateCommand { get; set; }
     public ICommand FindCommand { get; set; }
 
@@ -193,7 +194,21 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
 
     public async Task GetExercises()
     {
-        await _apiService.GetExerciseAsync("curls");
+        var exercises = await _apiService.GetExerciseAsync(Exercise);
+
+        ExerciseSuggestion.Clear();
+
+        //Shows all the options it got
+        for (int i = exercises.Count - 1; i >= 0; i--)
+        {
+            var exercise = exercises[i];
+            ExerciseSuggestion.Add(exercise);
+        }
+
+        //Whaits until user chooses needed one
+
+        //Clears out the search entry & and IsDropDownVisible = False        
+
     }
 
     private async Task CreateWorkout()

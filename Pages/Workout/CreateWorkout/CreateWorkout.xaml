@@ -21,18 +21,54 @@
             Stroke="White"
             StrokeThickness="2"
             Margin="5">
-            <Editor Text="{Binding WorkoutTitle}"
-                    Placeholder="Title:"
-                    AutoSize="TextChanges"/>
+            <Entry Text="{Binding WorkoutTitle}"
+                   Placeholder="Title:"/>
         </Border>
-        <Border
-            Stroke="White"
-            StrokeThickness="2"
-            Margin="5">
-            <Editor Text="{Binding Exercise}"
-                    Placeholder="Exercise:"
-                    AutoSize="TextChanges"/>
-        </Border>
+        <HorizontalStackLayout>
+            <Border
+                Stroke="White"
+                StrokeThickness="2"
+                Margin="5"
+                WidthRequest="350">
+                <Entry Text="{Binding Exercise}"
+                       Placeholder="Exercise:"/>
+            </Border>
+
+            <Button Text="Find"
+                    Command="{Binding FindCommand}"
+                    BorderWidth="2"
+                    BorderColor="White"
+                    CornerRadius="0"
+                    Margin="5"/>
+        </HorizontalStackLayout>
+
+        <CollectionView ItemsSource="{Binding ExerciseSuggestion}"
+                        IsVisible="{Binding IsDropDownVisible}"
+                        HeightRequest="250"
+                        Margin="5,0,5,10"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedExercise}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10"
+                          ColumnDefinitions="*, Auto">
+                        <Label
+                            Grid.Column="0"
+                            Text="{Binding name}"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            HorizontalOptions="FillAndExpand"/>
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding difficulty}"
+                            FontSize="12"
+                            MaxLines="1"/>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
         <HorizontalStackLayout
             HorizontalOptions="Center">
             <Picker
@@ -74,47 +110,6 @@
                 Command="{Binding CreateCommand}"
                 HorizontalOptions="Center"
                 VerticalOptions="End"/>
-
-        <Button Text="Find"
-                Command="{Binding FindCommand}"
-                HorizontalOptions="Center"
-                VerticalOptions="End"/>
-
-        <CollectionView ItemsSource="{Binding ExerciseSuggestion}"
-                        HeightRequest="650">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout Padding="10">
-                        <Label
-                            Text="{Binding name}"
-                            FontSize="16"
-                            FontAttributes="Bold"/>
-                        <Label
-                            Text="{Binding type}"
-                            FontSize="12"
-                            MaxLines="2"/>
-                        <Label
-                            Text="{Binding muscule}"
-                            FontSize="12"
-                            MaxLines="2"/>
-                        <Label
-                            Text="{Binding difficulty}"
-                            FontSize="12"
-                            MaxLines="2"/>
-                        <Label
-                            Text="{Binding instructions}"
-                            FontSize="12"
-                            MaxLines="2"/>
-                        <Label
-                            Text="{Binding safety_info}"
-                            FontSize="12"
-                            MaxLines="2"/>
-
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
 
     </VerticalStackLayout>
 
