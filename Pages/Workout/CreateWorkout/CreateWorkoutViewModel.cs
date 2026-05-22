@@ -10,10 +10,11 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
     private readonly INavigationService _navigation;
     private readonly ExerciseAPIService _apiService;
 
-
     public ObservableCollection<ExerciseAPIService.Exercise> ExerciseSuggestion { get; set; } = new();
+
     public ICommand CreateCommand { get; set; }
     public ICommand FindCommand { get; set; }
+    public ICommand SelectExerciseCommand { get; }
 
     private string? _workoutTitle;
     public string? WorkoutTitle
@@ -26,13 +27,24 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         }
     }
 
-    private string? _exercise;
-    public string? Exercise
+    private string? _exerciseEntry;
+    public string? ExerciseEntry
     {
-        get => _exercise;
+        get => _exerciseEntry;
         set
         {
-            _exercise = value;
+            _exerciseEntry = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private ExerciseAPIService.Exercise? _selectedExercise;
+    public ExerciseAPIService.Exercise? SelectedExercise
+    {
+        get => _selectedExercise;
+        set
+        {
+            _selectedExercise = value;
             OnPropertyChanged();
         }
     }
@@ -190,11 +202,13 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
 
         CreateCommand = new Command(async () => await CreateWorkout());
         FindCommand = new Command(async () => await GetExercises());
+
+        SelectExerciseCommand = new Command(async () => await GetExercises());
     }
 
     public async Task GetExercises()
     {
-        var exercises = await _apiService.GetExerciseAsync(Exercise);
+        var exercises = await _apiService.GetExerciseAsync(ExerciseEntry);
 
         ExerciseSuggestion.Clear();
 
@@ -204,12 +218,17 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
             var exercise = exercises[i];
             ExerciseSuggestion.Add(exercise);
         }
-
-        //Whaits until user chooses needed one
-
-        //Clears out the search entry & and IsDropDownVisible = False        
-
     }
+    // public Task SelectExercise(SelectedExercise)
+    // {
+    //     //Whaits until user chooses needed one
+    //     if (SelectedExercise == null)
+    //         return;
+    //     ExerciseEntry = SelectedExercise.name;
+
+    //     //SelectExercise(SelectedExercise);
+    //     //Clears out the search entry & and IsDropDownVisible = False        
+    // }
 
     private async Task CreateWorkout()
     {
@@ -225,7 +244,7 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         WorkoutExercises workoutExercises = new WorkoutExercises
         {
             WorkoutTitle = WorkoutTitle,
-            Exercise = Exercise,
+            Exercise = ExerciseEntry,
             //TODO: Подумай стоит ли сделать Sets и Reps снова int или оставить как есть и в процессе доставать число из строки?
             Sets = SelectedNumberOfSets,
             Reps = SelectedNumberOfReps
@@ -237,7 +256,7 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         await App.DatabaseService.SaveWorkoutExercisesAsync(workoutExercises);
 
         WorkoutTitle = string.Empty;
-        Exercise = string.Empty;
+        ExerciseEntry = string.Empty;
         SelectedWorkoutType = string.Empty;
         SelectedNumberOfSets = string.Empty;
         SelectedNumberOfReps = string.Empty;

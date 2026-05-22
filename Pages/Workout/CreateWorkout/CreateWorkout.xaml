@@ -47,7 +47,8 @@
                         HeightRequest="250"
                         Margin="5,0,5,10"
                         SelectionMode="Single"
-                        SelectedItem="{Binding SelectedExercise}">
+                        SelectedItem="{Binding SelectedExercise}"
+                        SelectionChangedCommand="{Binding SelectExerciseCommand}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10"
@@ -56,8 +57,7 @@
                             Grid.Column="0"
                             Text="{Binding name}"
                             FontSize="14"
-                            FontAttributes="Bold"
-                            HorizontalOptions="FillAndExpand"/>
+                            FontAttributes="Bold"/>
                         <Label
                             Grid.Column="1"
                             Text="{Binding difficulty}"
