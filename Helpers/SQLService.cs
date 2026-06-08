@@ -7,7 +7,6 @@ public class SQLService
     public SQLService(string databasePath)
     {
         _database = new SQLiteAsyncConnection(databasePath);
-
     }
 
     public async Task InitAsync()
@@ -15,7 +14,7 @@ public class SQLService
         await _database.CreateTableAsync<Notes>();
         await _database.CreateTableAsync<WorkoutPrograms>();
         await _database.CreateTableAsync<WorkoutExercises>();
-
+        await _database.CreateTableAsync<WorkoutSession>();
     }
 
     public async Task<List<Notes>> GetNotesAsync()
@@ -69,9 +68,37 @@ public class SQLService
         }
     }
 
-    //TODO: Add delete function
-    // public async Task<int> DeleteNoteAsync(Journal journal)
-    // {
+    public async Task<int> SaveWorkoutSessionAsync(WorkoutSession workoutSession)
+    {
+        if (workoutSession.Id != 0)
+        {
+            return await _database.UpdateAsync(workoutSession);
+        }
+        else
+        {
+            return await _database.InsertAsync(workoutSession);
+        }
+    }
 
-    // }
+    public async Task<int> GetWorkoutIdAsync(string workoutName)
+    {
+        var id = await _database.QueryScalarsAsync<int>("SELECT WorkoutId FROM WorkoutPrograms WHERE WorkoutName = ?", workoutName);
+
+        return id.FirstOrDefault();
+    }
+
+
+    public async Task<List<int>> GetExercisesIdAsync(List<string> names)
+    {
+        List<int> ids = new();
+
+        foreach (var name in names)
+        {
+            var id = await _database.QueryScalarsAsync<int>($"SELECT ExerciseId FROM WorkoutExercises WHERE Name = ?", name);
+            ids.Add(id.FirstOrDefault());
+        }
+
+        return ids;
+    }
+
 }

@@ -24,13 +24,14 @@
             <Entry Text="{Binding WorkoutTitle}"
                    Placeholder="Title:"/>
         </Border>
+
         <HorizontalStackLayout>
             <Border
                 Stroke="White"
                 StrokeThickness="2"
                 Margin="5"
                 WidthRequest="350">
-                <Entry Text="{Binding Exercise}"
+                <Entry Text="{Binding ExerciseEntry}"
                        Placeholder="Exercise:"/>
             </Border>
 
@@ -48,7 +49,8 @@
                         Margin="5,0,5,10"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedExercise}"
-                        SelectionChangedCommand="{Binding SelectExerciseCommand}">
+                        SelectionChangedCommand="{Binding SelectExerciseCommand}"
+                        MaximumHeightRequest="450">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10"
@@ -84,9 +86,10 @@
             <Picker
                 Title="Weight:"
                 ItemsSource="{Binding Weight}"
-                SelectedItem="{Binding SelectedNumber}"/>
+                SelectedItem="{Binding SelectedWeight}"/>
 
         </HorizontalStackLayout>
+
         <Button
             Text="Add exercise +"
             Command="{Binding AddExerciseCommand}"/>
@@ -110,7 +113,6 @@
                 Command="{Binding CreateCommand}"
                 HorizontalOptions="Center"
                 VerticalOptions="End"/>
-
     </VerticalStackLayout>
 
 </ContentPage>

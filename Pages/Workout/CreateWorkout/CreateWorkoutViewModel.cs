@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace gym_assistant;
 
@@ -15,6 +16,9 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
     public ICommand CreateCommand { get; set; }
     public ICommand FindCommand { get; set; }
     public ICommand SelectExerciseCommand { get; }
+    public ICommand AddExerciseCommand { get; }
+
+    private List<string> _exercisesList = new();
 
     private string? _workoutTitle;
     public string? WorkoutTitle
@@ -34,6 +38,16 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         set
         {
             _exerciseEntry = value;
+            OnPropertyChanged();
+        }
+    }
+    private bool _isDropDownVisible;
+    public bool IsDropDownVisible
+    {
+        get => _isDropDownVisible;
+        set
+        {
+            _isDropDownVisible = value;
             OnPropertyChanged();
         }
     }
@@ -95,13 +109,13 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         "22.5 kg", "25 kg",
         "27.5 kg", "30 kg"
     };
-    private string? _selectedNumber;
-    public string? SelectedNumber
+    private string? _selectedWeight;
+    public string? SelectedWeight
     {
-        get => _selectedNumber;
+        get => _selectedWeight;
         set
         {
-            _selectedNumber = value;
+            _selectedWeight = value;
             OnPropertyChanged();
         }
     }
@@ -203,7 +217,16 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         CreateCommand = new Command(async () => await CreateWorkout());
         FindCommand = new Command(async () => await GetExercises());
 
-        SelectExerciseCommand = new Command(async () => await GetExercises());
+        SelectExerciseCommand = new Command(() =>
+        {
+            if (SelectedExercise == null)
+                return;
+            ExerciseEntry = SelectedExercise.name;
+
+            IsDropDownVisible = false;
+        });
+
+        AddExerciseCommand = new Command(async () => await CreateExercise());
     }
 
     public async Task GetExercises()
@@ -211,6 +234,7 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         var exercises = await _apiService.GetExerciseAsync(ExerciseEntry);
 
         ExerciseSuggestion.Clear();
+        IsDropDownVisible = true;
 
         //Shows all the options it got
         for (int i = exercises.Count - 1; i >= 0; i--)
@@ -230,6 +254,23 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
     //     //Clears out the search entry & and IsDropDownVisible = False        
     // }
 
+    private async Task CreateExercise()
+    {
+        WorkoutExercises workoutExercises = new WorkoutExercises
+        {
+            Name = SelectedExercise.name,
+            Type = SelectedExercise.type,
+            Difficulty = SelectedExercise.difficulty,
+            Instructions = SelectedExercise.instructions,
+            Equipments = SelectedExercise.equipments.ToString(),
+            Safety_info = SelectedExercise.safety_info
+        };
+
+        await App.DatabaseService.SaveWorkoutExercisesAsync(workoutExercises);
+
+        _exercisesList.Add(workoutExercises.Name);
+    }
+
     private async Task CreateWorkout()
     {
         WorkoutPrograms workoutPrograms = new WorkoutPrograms
@@ -241,19 +282,23 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
             RestBetweenSets = SelectedRest
         };
 
-        WorkoutExercises workoutExercises = new WorkoutExercises
-        {
-            WorkoutTitle = WorkoutTitle,
-            Exercise = ExerciseEntry,
-            //TODO: Подумай стоит ли сделать Sets и Reps снова int или оставить как есть и в процессе доставать число из строки?
-            Sets = SelectedNumberOfSets,
-            Reps = SelectedNumberOfReps
-            //TODO: Order
-
-        };
-
         await App.DatabaseService.SaveWorkoutProgramsAsync(workoutPrograms);
-        await App.DatabaseService.SaveWorkoutExercisesAsync(workoutExercises);
+
+        var ids = await App.DatabaseService.GetExercisesIdAsync(_exercisesList);
+
+        foreach (int id in ids)
+        {
+            WorkoutSession workoutSession = new WorkoutSession
+            {
+                WorkoutId = await App.DatabaseService.GetWorkoutIdAsync(WorkoutTitle),
+                ExerciseId = id,
+                Sets = SelectedNumberOfSets,
+                Reps = SelectedNumberOfReps,
+                Weight = SelectedWeight
+                // Order= 
+            };
+            await App.DatabaseService.SaveWorkoutSessionAsync(workoutSession);
+        }
 
         WorkoutTitle = string.Empty;
         ExerciseEntry = string.Empty;
@@ -263,6 +308,7 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
         SelectedWarmUp = string.Empty;
         SelectedCoolDown = string.Empty;
         SelectedRest = string.Empty;
+        SelectedWeight = string.Empty;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

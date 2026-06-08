@@ -12,4 +12,10 @@ public partial class CreateWorkoutPage : ContentPage
 
         BindingContext = _createWorkoutModel;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        _createWorkoutModel.IsDropDownVisible = false;
+    }
 };

@@ -25,21 +25,21 @@ public class WorkoutService
     }
     public void StartWorkout(int workoutId)
     {
-        for (int i = 0; i < Workouts.Count; i++)
-        {
-            if (Workouts[i].IdWorkout == workoutId)
-            {
-                WorkoutSession.Add(new WorkoutSession(1, 1, 0.0, new DateTime(2022, 5, 10), "Note", false));
+        // for (int i = 0; i < Workouts.Count; i++)
+        // {
+        //     if (Workouts[i].IdWorkout == workoutId)
+        //     {
+        //         WorkoutSession.Add(new WorkoutSession(1, 1, 0.0, new DateTime(2022, 5, 10), "Note", false));
 
-                //TODO: Find out how u can display it simunteniosly and allow user to enter the note whenever he want
-                new WorkoutExercise
-                {
-                    Exercise = Workouts[i].Exercises,
-                    Note = "Note"
-                };
+        //         //TODO: Find out how u can display it simunteniosly and allow user to enter the note whenever he want
+        //         new WorkoutExercise
+        //         {
+        //             Exercise = Workouts[i].Exercises,
+        //             Note = "Note"
+        //         };
 
-            }
-        }
+        //     }
+        // }
 
 
     }
