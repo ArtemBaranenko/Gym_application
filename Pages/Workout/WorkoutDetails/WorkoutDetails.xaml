@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="gym_assistant.WorkoutDetailsPage">
+
+    <Shell.TitleView>
+        <HorizontalStackLayout HorizontalOptions="End">
+            <Button Text="Save"
+                    Command="{Binding SaveCommand}"
+                    BorderWidth="1"
+                    BorderColor="White"
+                    CornerRadius="0"
+                    Margin="10"
+                    Padding="5"/>
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"
+                    BorderWidth="1"
+                    BorderColor="White"
+                    CornerRadius="0"
+                    Margin="10"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+
+    <VerticalStackLayout Padding="10">
+
+        <Label
+            Text="{Binding SelectedWorkout.WorkoutName}"
+            FontSize="12"/>
+        <Label
+            Text="{Binding SelectedWorkout.WorkoutType}"
+            FontSize="12"/>
+        <Label
+            Text="{Binding SelectedWorkout.WarmUp}"
+            FontSize="12"/>
+        <Label
+            Text="{Binding SelectedWorkout.CoolDown}"
+            FontSize="12"/>
+        <Label
+            Text="{Binding SelectedWorkout.RestBetweenSets}"
+            FontSize="12"/>
+    </VerticalStackLayout>
+
+</ContentPage>

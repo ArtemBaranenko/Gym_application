@@ -26,6 +26,10 @@ public class SQLService
     {
         await _database.DeleteAsync(note);
     }
+    public async Task DeleteWorkoutProgramAsync(WorkoutPrograms workoutPrograms)
+    {
+        await _database.DeleteAsync(workoutPrograms);
+    }
 
     public async Task<int> SaveAsync(Notes notes)
     {
@@ -36,6 +40,18 @@ public class SQLService
         else
         {
             return await _database.InsertAsync(notes);
+        }
+    }
+
+    public async Task<int> SaveworkoutProgramAsync(WorkoutPrograms workoutPrograms)
+    {
+        if (workoutPrograms.WorkoutId != 0)
+        {
+            return await _database.UpdateAsync(workoutPrograms);
+        }
+        else
+        {
+            return await _database.InsertAsync(workoutPrograms);
         }
     }
 
@@ -101,4 +117,13 @@ public class SQLService
         return ids;
     }
 
+    public async Task<List<WorkoutPrograms>> GetWorkoutSessionsAsync()
+    {
+        return await _database.Table<WorkoutPrograms>().ToListAsync();
+    }
+
+    public async Task<List<WorkoutPrograms>> GetWorkoutSessionsDataAsync()
+    {
+        return await _database.Table<WorkoutPrograms>().ToListAsync();
+    }
 }

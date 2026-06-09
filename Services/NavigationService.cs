@@ -14,4 +14,8 @@ public class NavigationService : INavigationService
     {
         await Shell.Current.Navigation.PushAsync(new NoteDetailsPage(note));
     }
+    public async Task OpenWorkoutDetailsAsync(WorkoutPrograms workoutPrograms)
+    {
+        await Shell.Current.Navigation.PushAsync(new WorkoutDetailsPage(workoutPrograms));
+    }
 }

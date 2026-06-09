@@ -146,10 +146,6 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
 
     public ObservableCollection<string> WarmUp { get; set; } = new()
     {
-        "15 sec",
-        "30 sec",
-        "45 sec",
-        "60 sec",
         "1 min",
         "2 min",
         "3 min",
@@ -170,16 +166,9 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
 
     public ObservableCollection<string> CoolDown { get; set; } = new()
     {
-        "15 sec",
-        "30 sec",
-        "45 sec",
-        "60 sec",
-        "1 min",
-        "2 min",
-        "3 min",
-        "4 min",
         "5 min",
-        "10 min"
+        "10 min",
+        "15 min"
     };
     private string? _selectedCoolDown;
     public string? SelectedCoolDown
@@ -286,16 +275,16 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
 
         var ids = await App.DatabaseService.GetExercisesIdAsync(_exercisesList);
 
-        foreach (int id in ids)
+        for (int i = 0; i < ids.Count(); i++)
         {
             WorkoutSession workoutSession = new WorkoutSession
             {
                 WorkoutId = await App.DatabaseService.GetWorkoutIdAsync(WorkoutTitle),
-                ExerciseId = id,
+                ExerciseId = ids[i],
                 Sets = SelectedNumberOfSets,
                 Reps = SelectedNumberOfReps,
-                Weight = SelectedWeight
-                // Order= 
+                Weight = SelectedWeight,
+                Order = i + 1
             };
             await App.DatabaseService.SaveWorkoutSessionAsync(workoutSession);
         }

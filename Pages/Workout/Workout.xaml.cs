@@ -12,6 +12,14 @@ public partial class WorkoutPage : ContentPage
         BindingContext = __workoutModel;
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await App.DatabaseService.InitAsync();
+        await __workoutModel.UpdateWorkouts();
+    }
+
     // private async void OnExerciseModeClicked(object? sender, EventArgs e)
     // {
     //     await Navigation.PushModalAsync(new ExerciseModePage());
