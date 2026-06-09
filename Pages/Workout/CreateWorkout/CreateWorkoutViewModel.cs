@@ -220,16 +220,25 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
 
     public async Task GetExercises()
     {
-        var exercises = await _apiService.GetExerciseAsync(ExerciseEntry);
-
-        ExerciseSuggestion.Clear();
-        IsDropDownVisible = true;
-
-        //Shows all the options it got
-        for (int i = exercises.Count - 1; i >= 0; i--)
+        try
         {
-            var exercise = exercises[i];
-            ExerciseSuggestion.Add(exercise);
+            var exercises = await _apiService.GetExerciseAsync(ExerciseEntry);
+            ExerciseSuggestion.Clear();
+            IsDropDownVisible = true;
+
+            //Shows all the options it got
+            for (int i = exercises.Count - 1; i >= 0; i--)
+            {
+                var exercise = exercises[i];
+                ExerciseSuggestion.Add(exercise);
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Error",
+                "Unable to connect to the internet.",
+                "OK");
         }
     }
     // public Task SelectExercise(SelectedExercise)

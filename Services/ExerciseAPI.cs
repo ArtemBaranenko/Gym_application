@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Net;
 
 
 namespace gym_assistant;
@@ -31,13 +32,6 @@ public class ExerciseAPIService
         List<Exercise>? exercises = JsonSerializer.Deserialize<List<Exercise>>(responseString);
 
         return exercises!;
-
-        // response.EnsureSuccessStatusCode();
-        // var json = await response.Content.ReadAsStringAsync();
-
-        // var exercises = JsonSerializer.Deserialize<List<Exercise>>(json);
-
-        // return exercises ?? new List<ExerciseRoot>();
     }
     public class Exercise
     {

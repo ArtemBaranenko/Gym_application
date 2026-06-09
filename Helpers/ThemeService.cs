@@ -8,5 +8,10 @@ public static class ThemeService
     public static void LoadTheme()
     {
         string theme = Preferences.Get("Theme", "Light");
+
+        if (Enum.TryParse<AppTheme>(theme, out var appTheme))
+        {
+            Application.Current.UserAppTheme = appTheme;
+        }
     }
 }
