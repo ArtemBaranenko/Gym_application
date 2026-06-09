@@ -46,7 +46,17 @@ public class CreateNoteViewModel : INotifyPropertyChanged
             NoteDate = DateTime.Now
         };
 
-        await App.DatabaseService.SaveAsync(note);
+        if (note.Title == null || note.Note == null)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Warning",
+                "The title or note fields should not be empty.",
+                "OK");
+        }
+        else
+        {
+            await App.DatabaseService.SaveAsync(note);
+        }
 
         NoteTitle = string.Empty;
         NoteText = string.Empty;

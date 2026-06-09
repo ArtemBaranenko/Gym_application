@@ -222,15 +222,25 @@ public class CreateWorkoutViewModel : INotifyPropertyChanged
     {
         try
         {
-            var exercises = await _apiService.GetExerciseAsync(ExerciseEntry);
-            ExerciseSuggestion.Clear();
-            IsDropDownVisible = true;
-
-            //Shows all the options it got
-            for (int i = exercises.Count - 1; i >= 0; i--)
+            if (ExerciseEntry == null)
             {
-                var exercise = exercises[i];
-                ExerciseSuggestion.Add(exercise);
+                await Shell.Current.DisplayAlertAsync(
+                "Error",
+                "Enter the title of the exercise you are looking for.",
+                "OK");
+            }
+            else
+            {
+                var exercises = await _apiService.GetExerciseAsync(ExerciseEntry);
+                ExerciseSuggestion.Clear();
+                IsDropDownVisible = true;
+
+                //Shows all the options it got
+                for (int i = exercises.Count - 1; i >= 0; i--)
+                {
+                    var exercise = exercises[i];
+                    ExerciseSuggestion.Add(exercise);
+                }
             }
         }
         catch (Exception ex)

@@ -3,15 +3,175 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="gym_assistant.ProgressPage">
 
-    <Shell.TitleView>
-        <Label Text="Progress"
-               FontFamily="KumarOne-Regular"
-               FontSize="22"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-    </Shell.TitleView>
+        <Shell.TitleView>
+                <Label Text="Progress"
+                       FontFamily="KumarOne-Regular"
+                       FontSize="22"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+        </Shell.TitleView>
 
-    <Label
-        Text="Progress page"/>
+        <ContentPage.Resources>
+                <ResourceDictionary>
+                        <!-- Grid Orientation Style -->
+                        <Style TargetType="Grid"
+                               x:Key="GridStyle">
+                                <Setter Property="VisualStateManager.VisualStateGroups">
+                                        <VisualStateGroupList>
+                                                <VisualStateGroup>
+                                                        <!-- Portrait Stack Orientation Style -->
+                                                        <VisualState x:Name="Portrait">
+                                                                <VisualState.StateTriggers>
+                                                                        <OrientationStateTrigger Orientation="Portrait"/>
+                                                                </VisualState.StateTriggers>
+                                                                <VisualState.Setters>
+                                                                        <Setter Property="RowDefinitions"
+                                                                                Value="*,*,*"/>
+                                                                        <Setter Property="ColumnDefinitions"
+                                                                                Value="*,*"/>
+                                                                        <Setter TargetName="Weight"
+                                                                                Property="Grid.Row"
+                                                                                Value="0"/>
+                                                                        <Setter TargetName="Weight"
+                                                                                Property="Grid.Column"
+                                                                                Value="0"/>
+                                                                        <Setter TargetName="Weight"
+                                                                                Property="Grid.ColumnSpan"
+                                                                                Value="2"/>
+
+                                                                        <Setter TargetName="Load"
+                                                                                Property="Grid.Row"
+                                                                                Value="1"/>
+                                                                        <Setter TargetName="Load"
+                                                                                Property="Grid.Column"
+                                                                                Value="1"/>
+
+                                                                        <Setter TargetName="Rest"
+                                                                                Property="Grid.Row"
+                                                                                Value="2"/>
+                                                                        <Setter TargetName="Rest"
+                                                                                Property="Grid.Column"
+                                                                                Value="1"/>
+
+                                                                        <Setter TargetName="WeightProgress"
+                                                                                Property="Grid.Row"
+                                                                                Value="1"/>
+                                                                        <Setter TargetName="WeightProgress"
+                                                                                Property="Grid.Column"
+                                                                                Value="0"/>
+
+                                                                        <Setter TargetName="WorkoutsThisYear"
+                                                                                Property="Grid.Row"
+                                                                                Value="2"/>
+                                                                        <Setter TargetName="WorkoutsThisYear"
+                                                                                Property="Grid.Column"
+                                                                                Value="0"/>
+                                                                </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState x:Name="Landscape">
+                                                                <VisualState.StateTriggers>
+                                                                        <OrientationStateTrigger Orientation="Landscape"/>
+                                                                </VisualState.StateTriggers>
+                                                                <VisualState.Setters>
+                                                                        <Setter Property="RowDefinitions"
+                                                                                Value="*,*"/>
+                                                                        <Setter Property="ColumnDefinitions"
+                                                                                Value="*,2*,2*,*"/>
+                                                                        <Setter TargetName="Weight"
+                                                                                Property="Grid.Row"
+                                                                                Value="0"/>
+                                                                        <Setter TargetName="Weight"
+                                                                                Property="Grid.Column"
+                                                                                Value="1"/>
+                                                                        <Setter TargetName="Weight"
+                                                                                Property="Grid.ColumnSpan"
+                                                                                Value="2"/>
+                                                                        <Setter TargetName="Weight"
+                                                                                Property="Grid.RowSpan"
+                                                                                Value="2"/>
+
+                                                                        <Setter TargetName="Load"
+                                                                                Property="Grid.Row"
+                                                                                Value="0"/>
+                                                                        <Setter TargetName="Load"
+                                                                                Property="Grid.Column"
+                                                                                Value="0"/>
+
+                                                                        <Setter TargetName="Rest"
+                                                                                Property="Grid.Row"
+                                                                                Value="1"/>
+                                                                        <Setter TargetName="Rest"
+                                                                                Property="Grid.Column"
+                                                                                Value="0"/>
+
+                                                                        <Setter TargetName="WeightProgress"
+                                                                                Property="Grid.Row"
+                                                                                Value="0"/>
+                                                                        <Setter TargetName="WeightProgress"
+                                                                                Property="Grid.Column"
+                                                                                Value="3"/>
+
+                                                                        <Setter TargetName="WorkoutsThisYear"
+                                                                                Property="Grid.Row"
+                                                                                Value="1"/>
+                                                                        <Setter TargetName="WorkoutsThisYear"
+                                                                                Property="Grid.Column"
+                                                                                Value="3"/>
+                                                                </VisualState.Setters>
+                                                        </VisualState>
+                                                </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                </Setter>
+                        </Style>
+                </ResourceDictionary>
+        </ContentPage.Resources>
+
+        <Grid Style="{StaticResource GridStyle}">
+
+                <Border x:Name="Weight"
+                        StrokeShape="RoundRectangle 15"
+                        Stroke="Gray"
+                        StrokeThickness="2"
+                        Margin="10">
+                        <Image Source="weight.png"
+                               Margin="10"/>
+                </Border>
+
+                <Border x:Name="Load"
+                        StrokeShape="RoundRectangle 15"
+                        Stroke="Gray"
+                        StrokeThickness="2"
+                        Margin="10">
+                        <Image Source="load_this_week.png"
+                               Margin="10"/>
+                </Border>
+
+                <Border x:Name="Rest"
+                        StrokeShape="RoundRectangle 15"
+                        Stroke="Gray"
+                        StrokeThickness="2"
+                        Margin="10">
+                        <Image  Source="rest.png"
+                                Margin="10"/>
+                </Border>
+
+                <Border x:Name="WeightProgress"
+                        StrokeShape="RoundRectangle 15"
+                        Stroke="Gray"
+                        StrokeThickness="2"
+                        Margin="10">
+                        <Image Source="weight_progress.png"
+                               Margin="10"/>
+                </Border>
+
+                <Border x:Name="WorkoutsThisYear"
+                        StrokeShape="RoundRectangle 15"
+                        Stroke="Gray"
+                        StrokeThickness="2"
+                        Margin="10">
+                        <Image Source="workouts_this_year.png"
+                               Margin="10"/>
+                </Border>
+        </Grid>
 
 </ContentPage>
